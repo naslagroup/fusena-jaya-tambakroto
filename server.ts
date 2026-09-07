@@ -50,7 +50,7 @@ async function startServer() {
         // Fallback response if GEMINI_API_KEY is not set
         res.json({
           reply: `Halo! Terima kasih telah menghubungi Asisten AI CV. FUSENA JAYA. 
-                  \n\nUntuk pertanyaan mengenai "${prompt}", tim customer service kami siap membantu secara langsung 24/7 melalui WhatsApp +62 821-3456-7890. 
+                  \n\nUntuk pertanyaan mengenai "${prompt}", tim customer service kami siap membantu secara langsung 24/7 melalui WhatsApp 0857-9968-9175 (+62 857-9968-9175). 
                   \n\nLayanan CV. FUSENA JAYA:
                   - Sewa Bus Pariwisata (Medium, Big Bus, Sleeper)
                   - Paket Wisata (Study Tour, KKL, Ziarah Wali)

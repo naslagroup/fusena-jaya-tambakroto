@@ -58,6 +58,15 @@ export const Footer: React.FC = () => {
             <p className="text-slate-400 leading-relaxed">
               {COMPANY_INFO.address}
             </p>
+            <a
+              href={COMPANY_INFO.googleMapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-[11px] text-emerald-400 font-semibold hover:underline"
+            >
+              <MapPin className="w-3 h-3" />
+              <span>Petunjuk Rute Google Maps</span>
+            </a>
             <div className="text-emerald-400 font-bold text-sm">
               WhatsApp: {COMPANY_INFO.displayPhone}
             </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Phone, Mail, Clock, MessageCircle, Instagram, Facebook, ShieldCheck, Bus } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, MessageCircle, Instagram, Facebook, ShieldCheck, Bus, ExternalLink } from 'lucide-react';
 import { COMPANY_INFO } from '../data/mockData';
 
 export const ContactSection: React.FC = () => {
@@ -27,9 +27,20 @@ export const ContactSection: React.FC = () => {
                 <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0 mt-0.5">
                   <MapPin className="w-5 h-5" />
                 </div>
-                <div>
-                  <h4 className="font-bold text-sm text-white mb-1">Alamat Kantor & Garasi Armada</h4>
+                <div className="space-y-1">
+                  <h4 className="font-bold text-sm text-white flex items-center gap-2">
+                    <span>Alamat Kantor & Garasi Armada</span>
+                  </h4>
                   <p className="text-xs text-slate-300 leading-relaxed">{COMPANY_INFO.address}</p>
+                  <a
+                    href={COMPANY_INFO.googleMapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs text-emerald-400 font-semibold hover:text-emerald-300 pt-1 underline"
+                  >
+                    <span>Buka Rute Pin Peta Google Maps</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
                 </div>
               </div>
 
@@ -38,8 +49,8 @@ export const ContactSection: React.FC = () => {
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-sm text-white mb-1">Customer Service & Hotline</h4>
-                  <p className="text-xs text-slate-300">{COMPANY_INFO.displayPhone} / {COMPANY_INFO.secondaryPhone}</p>
+                  <h4 className="font-bold text-sm text-white mb-1">Customer Service & Hotline (WhatsApp)</h4>
+                  <p className="text-xs text-slate-300 font-semibold">{COMPANY_INFO.displayPhone}</p>
                 </div>
               </div>
 
@@ -79,16 +90,28 @@ export const ContactSection: React.FC = () => {
 
           {/* Right Column: Google Maps Card & Directions */}
           <div className="lg:col-span-6 bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6">
-            <h3 className="font-extrabold text-lg text-white flex items-center gap-2">
-              <Bus className="w-5 h-5 text-emerald-400" />
-              <span>Lokasi Strategis Garasi Armada</span>
-            </h3>
+            <div className="flex items-center justify-between gap-4 flex-wrap">
+              <h3 className="font-extrabold text-lg text-white flex items-center gap-2">
+                <Bus className="w-5 h-5 text-emerald-400" />
+                <span>Lokasi Strategis Garasi Armada</span>
+              </h3>
+              <a
+                href={COMPANY_INFO.googleMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20 text-xs font-bold transition-all"
+              >
+                <MapPin className="w-3.5 h-3.5" />
+                <span>Buka Google Maps App</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
 
             <div className="aspect-video rounded-2xl overflow-hidden border border-slate-700 bg-slate-950 relative">
               {/* Responsive Maps Embed / Visual Frame */}
               <iframe
                 title="Lokasi CV Fusena Jaya"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126743.58550117498!2d110.8033285!3d-6.8122495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e70c4310574803d%3A0x86bb1f91d90f230!2sKudus%2C%20Kudus%20Regency%2C%20Central%20Java!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid"
+                src="https://maps.google.com/maps?q=Unnamed+Road%2C+Pentalan%2C+Tambakroto%2C+Kec.+Sayung%2C+Kabupaten+Demak%2C+Jawa+Tengah+59563&t=&z=15&ie=UTF8&iwloc=&output=embed"
                 className="w-full h-full border-0 grayscale contrast-125 opacity-90"
                 loading="lazy"
                 allowFullScreen

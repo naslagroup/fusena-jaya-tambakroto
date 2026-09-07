@@ -12,11 +12,12 @@ export const COMPANY_INFO = {
   name: 'CV. FUSENA JAYA',
   tagline: 'Biro Perjalanan Ziarah dan Wisata',
   subtext: 'Solusi Lengkap Sewa Armada Pariwisata, Tour Ziarah, Study Tour, & Dokumentasi Cinematic Professional.',
-  phone: '6282134567890', // WhatsApp phone formatted
-  displayPhone: '+62 821-3456-7890',
-  secondaryPhone: '+62 857-1234-5678',
+  phone: '6285799689175', // WhatsApp phone formatted for wa.me link
+  displayPhone: '0857-9968-9175',
+  secondaryPhone: '0857-9968-9175',
   email: 'fusenajaya.official@gmail.com',
-  address: 'Jl. Raya Kudus - Demak Km. 7, Karanganyar, Kabupaten Demak, Jawa Tengah 59582',
+  address: 'Unnamed Road, Pentalan, Tambakroto, Kec. Sayung, Kabupaten Demak, Jawa Tengah 59563',
+  googleMapsUrl: 'https://maps.app.goo.gl/xMAqqqEncZuou5xPA',
   operatingHours: 'Setiap Hari 24 Jam (Layanan Online & Booking)',
   instagram: '@fusenajaya_tour',
   tiktok: '@fusenajaya_official',
