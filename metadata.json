@@ -1,0 +1,6 @@
+{
+  "name": "CV. FUSENA JAYA - Biro Perjalanan Ziarah & Wisata",
+  "description": "Website resmi Biro Perjalanan Ziarah dan Wisata CV. FUSENA JAYA. Melayani sewa bus pariwisata, paket wisata study tour, KKL, kunjungan industri, ziarah Wali, sewa Elf, carter mobil pribadi & driver, rental kamera, fotografer & video cinematic.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
