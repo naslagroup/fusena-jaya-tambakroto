@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { 
   MapPin, 
   Camera, 
@@ -17,7 +17,14 @@ import {
   Users,
   Compass,
   Calendar,
-  ChevronRight
+  ChevronRight,
+  Play,
+  Pause,
+  Volume2,
+  VolumeX,
+  Instagram,
+  Youtube,
+  Film
 } from 'lucide-react';
 import { COMPANY_INFO, FLEET_ITEMS, TOUR_PACKAGES, EVENT_ORGANIZER_SERVICES } from '../data/mockData';
 
@@ -31,6 +38,28 @@ interface FlyerShowcaseProps {
 
 export const FlyerShowcase: React.FC<FlyerShowcaseProps> = ({ onSelectBookingItem }) => {
   const [selectedFleetTab, setSelectedFleetTab] = useState<'mobil' | 'hiace' | 'elf' | 'bus'>('bus');
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        videoRef.current.play().catch(() => {});
+        setIsPlaying(true);
+      }
+    }
+  };
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
+  };
 
   // Fleet data mapping for the 4 pillars shown in the flyer
   const fleetCategories = [
@@ -112,25 +141,215 @@ export const FlyerShowcase: React.FC<FlyerShowcaseProps> = ({ onSelectBookingIte
             </div>
           </div>
 
-          {/* Big Headline mirroring flyer script / brush style with Official Logo */}
-          <div className="text-center mt-6 flex flex-col items-center">
-            <div className="mb-4 p-3 bg-white rounded-2xl shadow-xl border border-sky-100 transform hover:scale-105 transition-transform">
-              <img
-                src="/fusena-logo.svg"
-                alt="Logo Resmi CV. FUSENA JAYA"
-                className="h-24 sm:h-32 object-contain"
-                referrerPolicy="no-referrer"
-              />
+          {/* Big Headline mirroring flyer script / brush style with Official Logo and Featured Reel Video */}
+          <div className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Desktop Left / Mobile Top: Logo Resmi, Headline, and Description */}
+            <div className="lg:col-span-7 text-center lg:text-left flex flex-col items-center lg:items-start">
+              <div className="mb-5 p-3.5 sm:p-4 bg-white rounded-2xl shadow-xl border border-sky-100 inline-flex items-center gap-3 transform hover:scale-105 transition-transform">
+                <img
+                  src="/fusena-logo.svg"
+                  alt="Logo Resmi CV. FUSENA JAYA"
+                  className="h-20 sm:h-28 lg:h-32 object-contain"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 border border-white/25 text-white backdrop-blur-md mb-4 shadow-sm text-xs font-bold tracking-wide">
+                <ShieldCheck className="w-4 h-4 text-[#00A859]" />
+                <span>Logo Resmi CV. FUSENA JAYA</span>
+              </div>
+
+              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight drop-shadow-md">
+                Biro Perjalanan Wisata <br />
+                <span className="font-script text-4xl sm:text-6xl lg:text-7xl font-bold text-amber-300 drop-shadow-[0_2px_10px_rgba(245,158,11,0.5)]">
+                  &amp; Event Organizer
+                </span>
+              </h2>
+
+              <p className="mt-4 text-sm sm:text-base lg:text-lg text-sky-50 max-w-2xl font-medium leading-relaxed drop-shadow-xs">
+                Layanan Terpadu Transportasi Pariwisata, Paket Tour Lengkap, dan Penyelenggara Acara Profesional di Jawa Tengah &amp; Seluruh Indonesia.
+              </p>
+
+              {/* Service Highlights Pills */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-5 w-full max-w-xl">
+                {[
+                  'Sewa Bus Pariwisata',
+                  'Toyota HiAce & Elf',
+                  'Rental Mobil & Dinas',
+                  'Paket Tour & Wisata',
+                  'Ziarah & Religi',
+                  'EO, Wedding & Gathering',
+                ].map((highlight, idx) => (
+                  <div 
+                    key={idx} 
+                    className="flex items-center gap-2 bg-white/10 border border-white/20 rounded-xl px-3 py-2 text-white text-xs font-semibold backdrop-blur-sm shadow-xs"
+                  >
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#00A859] flex-shrink-0" />
+                    <span className="truncate">{highlight}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3.5 pt-6">
+                <a
+                  href={`https://wa.me/${COMPANY_INFO.phone}?text=Halo%20Mas%20${encodeURIComponent(COMPANY_INFO.contactPerson)},%20saya%20tertarik%20dengan%20layanan%20CV.%20Fusena%20Jaya%20setelah%20melihat%20video%20dokumentasi%20resmi.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 bg-[#00A859] hover:bg-emerald-600 text-white font-bold text-sm px-5 py-3 rounded-xl shadow-lg shadow-emerald-900/30 transition-all hover:scale-105 active:scale-95"
+                >
+                  <MessageCircle className="w-4 h-4 text-white" />
+                  <span>Konsultasi WA Cepat</span>
+                </a>
+
+                <a
+                  href="https://www.instagram.com/fusenajaya_/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#FCB045] hover:opacity-90 text-white font-bold text-sm px-5 py-3 rounded-xl shadow-md transition-all hover:scale-105 active:scale-95"
+                >
+                  <Instagram className="w-4 h-4" />
+                  <span>Instagram @fusenajaya_</span>
+                </a>
+              </div>
             </div>
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight drop-shadow-md">
-              Biro Perjalanan Wisata <br />
-              <span className="font-script text-4xl sm:text-6xl lg:text-7xl font-bold text-amber-300 drop-shadow-[0_2px_10px_rgba(245,158,11,0.5)]">
-                &amp; Event Organizer
-              </span>
-            </h2>
-            <p className="mt-3 text-sm sm:text-base text-sky-50 max-w-2xl mx-auto font-medium drop-shadow-xs">
-              Layanan Terpadu Transportasi Pariwisata, Paket Tour Lengkap, dan Penyelenggara Acara Profesional di Jawa Tengah &amp; Seluruh Indonesia.
-            </p>
+
+            {/* Desktop Right (Di samping) / Mobile Bottom (Di bagian bawahnya): The Video */}
+            <div className="lg:col-span-5 flex justify-center w-full">
+              <div className="relative w-full max-w-[320px] sm:max-w-[340px] lg:max-w-[340px]">
+                {/* Ambient Glow */}
+                <div className="absolute -inset-2 bg-gradient-to-tr from-amber-400/30 via-emerald-500/25 to-sky-400/30 rounded-[38px] blur-xl opacity-80 group-hover:opacity-100 transition-opacity pointer-events-none" />
+
+                {/* Smartphone Style Container */}
+                <div className="relative bg-slate-950/95 rounded-[32px] p-2.5 sm:p-3 border-2 border-amber-300/60 shadow-2xl backdrop-blur-xl overflow-hidden group">
+                  {/* Phone Speaker Notch */}
+                  <div className="flex items-center justify-center gap-2 pb-2.5 pt-1">
+                    <span className="w-12 h-1 rounded-full bg-slate-700" />
+                    <span className="w-2 h-2 rounded-full bg-slate-700" />
+                  </div>
+
+                  {/* Video Stage Frame */}
+                  <div className="relative rounded-2xl overflow-hidden aspect-[9/16] bg-black shadow-inner">
+                    <video
+                      ref={videoRef}
+                      src="/videos/fusena-reel.mp4"
+                      poster="/videos/fusena-reel-poster.jpg"
+                      autoPlay
+                      loop
+                      muted={isMuted}
+                      playsInline
+                      className="w-full h-full object-cover cursor-pointer"
+                      onClick={togglePlay}
+                    />
+
+                    {/* Top Overlay Controls */}
+                    <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between z-10 pointer-events-none">
+                      <div className="flex items-center gap-1.5 bg-black/65 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20 text-[11px] font-bold text-white shadow-md">
+                        <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
+                        <Film className="w-3 h-3 text-amber-300" />
+                        <span>Video Resmi</span>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleMute();
+                        }}
+                        className="pointer-events-auto flex items-center gap-1.5 bg-black/75 hover:bg-black/90 active:scale-95 transition-all text-white px-3 py-1.5 rounded-full border border-amber-400/50 text-[11px] font-semibold shadow-md backdrop-blur-md cursor-pointer"
+                        title={isMuted ? 'Nyalakan Suara' : 'Senyapkan'}
+                      >
+                        {isMuted ? (
+                          <>
+                            <VolumeX className="w-3.5 h-3.5 text-amber-300" />
+                            <span className="text-[10px] text-amber-200">Suara Off</span>
+                          </>
+                        ) : (
+                          <>
+                            <Volume2 className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
+                            <span className="text-[10px] text-emerald-300">Suara On</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
+
+                    {/* Centered Play/Pause Button on Hover or when Paused */}
+                    <button
+                      type="button"
+                      onClick={togglePlay}
+                      aria-label={isPlaying ? 'Jeda video' : 'Putar video'}
+                      className={`absolute inset-0 m-auto w-14 h-14 rounded-full bg-black/55 hover:bg-black/75 border border-white/40 text-white flex items-center justify-center transition-all backdrop-blur-sm z-10 cursor-pointer ${
+                        isPlaying ? 'opacity-0 hover:opacity-100' : 'opacity-100 ring-4 ring-amber-400/50 scale-105'
+                      }`}
+                    >
+                      {isPlaying ? (
+                        <Pause className="w-6 h-6 text-white" />
+                      ) : (
+                        <Play className="w-6 h-6 text-amber-300 fill-amber-300 ml-0.5" />
+                      )}
+                    </button>
+
+                    {/* Bottom Gradient Overlay with Fusena Jaya Branding */}
+                    <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/95 via-black/70 to-transparent p-3 sm:p-3.5 pt-8 text-white z-10 flex flex-col gap-1.5 pointer-events-none">
+                      <div className="flex items-center gap-2 pointer-events-auto">
+                        <img
+                          src="/fusena-emblem.svg"
+                          alt="CV. FUSENA JAYA"
+                          className="w-5 h-5 rounded-full bg-white p-0.5"
+                        />
+                        <span className="font-bold text-xs text-white drop-shadow-sm">CV. FUSENA JAYA</span>
+                        <span className="text-[9px] bg-amber-400/20 text-amber-300 border border-amber-400/40 px-1.5 py-0.5 rounded font-bold">
+                          VERIFIED
+                        </span>
+                      </div>
+
+                      <p className="text-[11px] leading-snug text-slate-200">
+                        &ldquo;Biro Perjalanan Wisata &amp; EO Melayani Semua Paket Wisata, Sewa Bus, Rental Mobil &amp; Dokumentasi Acara. Fusena Jaya Bos!&rdquo;
+                      </p>
+
+                      <div className="flex items-center justify-between pt-1 border-t border-white/15 text-[10px] pointer-events-auto">
+                        <div className="flex items-center gap-2">
+                          <a
+                            href="https://www.instagram.com/fusenajaya_/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-1 text-pink-300 hover:text-pink-200 font-semibold"
+                          >
+                            <Instagram className="w-3 h-3" />
+                            <span>@fusenajaya_</span>
+                          </a>
+                          <span className="text-slate-500">&bull;</span>
+                          <a
+                            href="https://www.youtube.com/@fusenajayatourtravel6939"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-1 text-red-400 hover:text-red-300 font-semibold"
+                          >
+                            <Youtube className="w-3 h-3" />
+                            <span>YouTube</span>
+                          </a>
+                        </div>
+                        <span className="text-emerald-400 font-bold flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#00A859] animate-pulse" />
+                          Layanan 24 Jam
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Video Footer Caption */}
+                  <div className="mt-2.5 text-center px-1">
+                    <p className="text-[11px] font-bold text-amber-300 flex items-center justify-center gap-1">
+                      <Sparkles className="w-3 h-3 text-amber-300" />
+                      <span>Dokumentasi Lapangan CV. FUSENA JAYA</span>
+                    </p>
+                    <p className="text-[10px] text-slate-400 pt-0.5">
+                      Klik video untuk putar/jeda &bull; Tombol suara di pojok kanan atas
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

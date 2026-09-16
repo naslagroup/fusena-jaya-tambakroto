@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bus, MapPin, Phone, Mail, ChevronRight, ShieldCheck, Heart, MessageCircle } from 'lucide-react';
+import { Bus, MapPin, Phone, Mail, ChevronRight, ShieldCheck, Heart, MessageCircle, Instagram, Youtube } from 'lucide-react';
 import { COMPANY_INFO } from '../data/mockData';
 import { BrandLogo } from './BrandLogo';
 
@@ -66,7 +66,7 @@ export const Footer: React.FC = () => {
               <span>Buka Titik Lokasi di Google Maps</span>
             </a>
 
-            <div className="pt-2">
+            <div className="pt-2 flex flex-col gap-2">
               <a
                 href={`https://wa.me/${COMPANY_INFO.phone}?text=Halo%20Mas%20${encodeURIComponent(COMPANY_INFO.contactPerson)},%20saya%20ingin%20konsultasi%20layanan%20CV.%20Fusena%20Jaya.`}
                 target="_blank"
@@ -76,6 +76,28 @@ export const Footer: React.FC = () => {
                 <MessageCircle className="w-4 h-4" />
                 <span>WA. {COMPANY_INFO.waNumberClean} ({COMPANY_INFO.contactPerson})</span>
               </a>
+
+              <div className="flex items-center gap-2 pt-1">
+                <a
+                  href="https://www.instagram.com/fusenajaya_/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 bg-gradient-to-r from-[#833AB4]/30 via-[#FD1D1D]/30 to-[#FCB045]/30 hover:bg-pink-600/40 text-pink-300 font-bold text-[11px] px-3 py-1.5 rounded-lg border border-pink-500/30 transition-all hover:scale-105"
+                >
+                  <Instagram className="w-3.5 h-3.5 text-pink-400" />
+                  <span>@fusenajaya_</span>
+                </a>
+
+                <a
+                  href="https://www.youtube.com/@fusenajayatourtravel6939"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 bg-red-600/20 hover:bg-red-600/40 text-red-300 font-bold text-[11px] px-3 py-1.5 rounded-lg border border-red-500/30 transition-all hover:scale-105"
+                >
+                  <Youtube className="w-3.5 h-3.5 text-red-500" />
+                  <span>YouTube Official</span>
+                </a>
+              </div>
             </div>
             <p className="text-[11px] text-sky-300 pt-1">
               Email: {COMPANY_INFO.email}

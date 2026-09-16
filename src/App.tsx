@@ -5,7 +5,7 @@ import { FlyerShowcase } from './components/FlyerShowcase';
 import { ServicesSection } from './components/ServicesSection';
 import { AiConsultantSection } from './components/AiConsultantSection';
 import { PortfolioSection } from './components/PortfolioSection';
-import { CostCalculator } from './components/CostCalculator';
+import { SocialMediaSection } from './components/SocialMediaSection';
 import { TestimonialsSection } from './components/TestimonialsSection';
 import { FaqSection } from './components/FaqSection';
 import { ContactSection } from './components/ContactSection';
@@ -92,10 +92,8 @@ export default function App() {
         {/* Portfolio & Gallery Showcase */}
         <PortfolioSection />
 
-        {/* Rental Cost Calculator */}
-        <CostCalculator
-          onOpenBookingWithDetails={handleSelectBookingItem}
-        />
+        {/* Official Social Media Feed (Instagram & YouTube) */}
+        <SocialMediaSection />
 
         {/* Reviews & Testimonials */}
         <TestimonialsSection />

@@ -9,7 +9,9 @@ import {
   Camera, 
   Calendar,
   MessageCircle,
-  Compass
+  Compass,
+  Instagram,
+  Youtube
 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/mockData';
 import { BrandLogo } from './BrandLogo';
@@ -41,7 +43,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, activeSection }) 
     { name: 'Paket Wisata', href: '#paket' },
     { name: 'Event Organizer', href: '#event-organizer' },
     { name: 'Katalog Detail', href: '#layanan' },
-    { name: 'Simulasi Sewa', href: '#kalkulator' },
+    { name: 'Sosial Media', href: '#sosial-media' },
     { name: 'Kontak', href: '#kontak' },
   ];
 
@@ -66,13 +68,32 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, activeSection }) 
             </a>
           </div>
           <div className="flex items-center gap-4">
-            <span className="text-amber-300 font-script text-base font-bold tracking-wide">
-              &ldquo;{COMPANY_INFO.motto}&rdquo;
-            </span>
+            <div className="flex items-center gap-2">
+              <a
+                href="https://www.instagram.com/fusenajaya_/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 hover:text-pink-300 transition-colors bg-pink-500/10 px-2 py-0.5 rounded text-[11px] font-bold text-pink-200 border border-pink-500/30"
+                title="Instagram @fusenajaya_"
+              >
+                <Instagram className="w-3 h-3 text-pink-400" />
+                <span>@fusenajaya_</span>
+              </a>
+              <a
+                href="https://www.youtube.com/@fusenajayatourtravel6939"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 hover:text-red-300 transition-colors bg-red-500/10 px-2 py-0.5 rounded text-[11px] font-bold text-red-200 border border-red-500/30"
+                title="YouTube @fusenajayatourtravel6939"
+              >
+                <Youtube className="w-3 h-3 text-red-400" />
+                <span>YouTube</span>
+              </a>
+            </div>
             <span className="text-sky-700">|</span>
             <span className="text-emerald-300 font-medium flex items-center gap-1">
               <span className="w-2 h-2 rounded-full bg-[#00A859] animate-pulse"></span>
-              Layanan Wisata &amp; EO 24 Jam
+              Layanan 24 Jam
             </span>
           </div>
         </div>
