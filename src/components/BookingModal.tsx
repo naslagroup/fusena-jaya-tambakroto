@@ -14,7 +14,7 @@ import {
   PlusCircle,
   FileText
 } from 'lucide-react';
-import { COMPANY_INFO, FLEET_ITEMS, TOUR_PACKAGES, CAMERA_GEAR, MEDIA_SERVICES } from '../data/mockData';
+import { COMPANY_INFO, FLEET_ITEMS, TOUR_PACKAGES, CAMERA_GEAR, MEDIA_SERVICES, EVENT_ORGANIZER_SERVICES } from '../data/mockData';
 import { BookingFormState, ServiceCategory } from '../types';
 
 interface BookingModalProps {
@@ -104,6 +104,11 @@ export const BookingModal: React.FC<BookingModalProps> = ({
       if (media) {
         return media.priceStartFrom;
       }
+      // Check in Event Organizer Services
+      const eo = EVENT_ORGANIZER_SERVICES.find((e) => e.id === formState.selectedItemId);
+      if (eo) {
+        return eo.priceStartFrom;
+      }
     }
 
     let total = basePricePerDay * formState.durationDays;
@@ -143,9 +148,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
 *Catatan Tambahan:* ${formState.notes || '-'}
 ----------------------------------------
-*Estimasi Total Biaya:* Rp ${estimatedTotal.toLocaleString('id-ID')}
-
-Mohon konfirmasi ketersediaan dan rincian Down Payment (DP) resmi. Terima kasih!`;
+*Permohonan:* Mohon konfirmasi ketersediaan unit dan kirimkan penawaran harga terbaik untuk rombongan kami. Terima kasih!`;
 
     const encoded = encodeURIComponent(message);
     window.open(`https://wa.me/${COMPANY_INFO.phone}?text=${encoded}`, '_blank');
@@ -190,12 +193,17 @@ Mohon konfirmasi ketersediaan dan rincian Down Payment (DP) resmi. Terima kasih!
         {/* Modal Header */}
         <div className="bg-slate-900 text-white p-6 flex items-center justify-between border-b border-slate-800">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
-              <Bus className="w-5 h-5" />
+            <div className="w-11 h-11 rounded-2xl bg-white/10 p-1 flex items-center justify-center border border-white/20">
+              <img
+                src="/fusena-emblem.svg"
+                alt="Logo CV. FUSENA JAYA"
+                className="w-full h-full object-contain"
+                referrerPolicy="no-referrer"
+              />
             </div>
             <div>
-              <h3 className="font-extrabold text-lg text-white">Form Booking Online</h3>
-              <p className="text-xs text-emerald-400 font-medium">CV. FUSENA JAYA - Perjalanan Ziarah & Wisata</p>
+              <h3 className="font-extrabold text-lg text-white">Form Booking &amp; Reservasi</h3>
+              <p className="text-xs text-emerald-400 font-medium">CV. FUSENA JAYA — Biro Perjalanan Wisata &amp; Event Organizer</p>
             </div>
           </div>
           <button
@@ -270,12 +278,18 @@ Mohon konfirmasi ketersediaan dan rincian Down Payment (DP) resmi. Terima kasih!
                       if (cat === 'paket-wisata') {
                         defaultTitle = TOUR_PACKAGES[0].title;
                         defaultId = TOUR_PACKAGES[0].id;
+                      } else if (cat === 'hiace') {
+                        defaultTitle = 'Toyota HiAce Premio Executive';
+                        defaultId = 'hiace-premio';
                       } else if (cat === 'elf') {
                         defaultTitle = FLEET_ITEMS.find((f) => f.category === 'elf')?.name || 'Elf Long';
                         defaultId = 'elf-long';
                       } else if (cat === 'mobil') {
                         defaultTitle = 'Toyota Innova Reborn';
                         defaultId = 'innova-reborn';
+                      } else if (cat === 'event-organizer') {
+                        defaultTitle = EVENT_ORGANIZER_SERVICES[0].title;
+                        defaultId = EVENT_ORGANIZER_SERVICES[0].id;
                       } else if (cat === 'kamera') {
                         defaultTitle = CAMERA_GEAR[0].name;
                         defaultId = CAMERA_GEAR[0].id;
@@ -294,11 +308,13 @@ Mohon konfirmasi ketersediaan dan rincian Down Payment (DP) resmi. Terima kasih!
                     className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-xs font-medium text-slate-800"
                   >
                     <option value="bus">Sewa Bus Pariwisata</option>
-                    <option value="paket-wisata">Paket Tour & Ziarah</option>
+                    <option value="hiace">Sewa Toyota HiAce</option>
                     <option value="elf">Sewa Microbus Elf</option>
-                    <option value="mobil">Sewa Mobil Pribadi & Driver</option>
-                    <option value="kamera">Rental Kamera & Drone</option>
-                    <option value="cinematic">Jasa Fotografer & Video Cinematic</option>
+                    <option value="mobil">Sewa Rental Mobil &amp; Driver</option>
+                    <option value="paket-wisata">Paket Wisata &amp; Ziarah</option>
+                    <option value="event-organizer">Event Organizer &amp; Acara</option>
+                    <option value="kamera">Rental Kamera &amp; Drone</option>
+                    <option value="cinematic">Jasa Fotografer &amp; Video Cinematic</option>
                   </select>
                 </div>
 
@@ -429,7 +445,7 @@ Mohon konfirmasi ketersediaan dan rincian Down Payment (DP) resmi. Terima kasih!
                   />
                   <div>
                     <span className="font-bold text-slate-800 block">Jasa Fotografer</span>
-                    <span className="text-[10px] text-slate-500">+Rp 750rb / hari</span>
+                    <span className="text-[10px] text-[#00A859] font-semibold">Kru Berpengalaman</span>
                   </div>
                 </label>
 
@@ -444,7 +460,7 @@ Mohon konfirmasi ketersediaan dan rincian Down Payment (DP) resmi. Terima kasih!
                   />
                   <div>
                     <span className="font-bold text-slate-800 block">Video Cinematic Reels</span>
-                    <span className="text-[10px] text-slate-500">+Rp 1,2jt / hari</span>
+                    <span className="text-[10px] text-[#00A859] font-semibold">Format 4K &amp; Aftermovie</span>
                   </div>
                 </label>
 
@@ -459,7 +475,7 @@ Mohon konfirmasi ketersediaan dan rincian Down Payment (DP) resmi. Terima kasih!
                   />
                   <div>
                     <span className="font-bold text-slate-800 block">Drone Footage Aerial</span>
-                    <span className="text-[10px] text-slate-500">+Rp 1jt / trip</span>
+                    <span className="text-[10px] text-[#00A859] font-semibold">Pilot Berlisensi</span>
                   </div>
                 </label>
               </div>
@@ -523,16 +539,16 @@ Mohon konfirmasi ketersediaan dan rincian Down Payment (DP) resmi. Terima kasih!
             </div>
 
             {/* Total Estimation Box */}
-            <div className="bg-emerald-900 text-white p-5 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="bg-[#0B2540] text-white p-5 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 border border-sky-600/30">
               <div>
-                <span className="text-[11px] text-emerald-300 uppercase font-bold tracking-wider">
-                  Estimasi Biaya ({formState.durationDays} Hari)
+                <span className="text-[11px] text-amber-300 uppercase font-bold tracking-wider block">
+                  Penawaran Harga Resmi ({formState.durationDays} Hari)
                 </span>
-                <div className="text-2xl font-extrabold text-white">
-                  Rp {estimatedTotal.toLocaleString('id-ID')}
+                <div className="text-xl sm:text-2xl font-black text-white">
+                  Tarif Khusus &amp; Nego Ramah
                 </div>
-                <span className="text-[10px] text-emerald-200">
-                  *Belum termasuk biaya tol, parkir & tips driver opsional
+                <span className="text-[11px] text-sky-200 block mt-0.5">
+                  *Tarif disesuaikan rute, tanggal, dan fasilitas rombongan Anda
                 </span>
               </div>
 
@@ -540,10 +556,10 @@ Mohon konfirmasi ketersediaan dan rincian Down Payment (DP) resmi. Terima kasih!
                 <button
                   type="button"
                   onClick={handleWhatsAppBooking}
-                  className="flex-1 sm:flex-none bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs px-5 py-3 rounded-xl transition-all shadow-lg flex items-center justify-center gap-2"
+                  className="flex-1 sm:flex-none bg-[#00A859] hover:bg-emerald-600 text-white font-black text-xs px-5 py-3 rounded-xl transition-all shadow-lg flex items-center justify-center gap-2"
                 >
                   <MessageCircle className="w-4 h-4" />
-                  <span>Kirim Ke WA</span>
+                  <span>Kirim Ke WA CS</span>
                 </button>
 
                 <button

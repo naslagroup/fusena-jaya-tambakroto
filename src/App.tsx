@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
+import { FlyerShowcase } from './components/FlyerShowcase';
 import { ServicesSection } from './components/ServicesSection';
 import { AiConsultantSection } from './components/AiConsultantSection';
 import { PortfolioSection } from './components/PortfolioSection';
@@ -72,6 +73,11 @@ export default function App() {
         <Hero
           onSearchSubmit={handleHeroSearch}
           onOpenBooking={handleOpenBooking}
+        />
+
+        {/* Master Flyer Showcase: Exact Package & Service Layout from Official Flyer */}
+        <FlyerShowcase
+          onSelectBookingItem={handleSelectBookingItem}
         />
 
         {/* Services & Fleet Catalog */}

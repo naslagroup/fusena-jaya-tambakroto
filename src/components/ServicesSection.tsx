@@ -14,16 +14,19 @@ import {
   ChevronRight,
   Info,
   ShieldAlert,
-  Compass
+  Compass,
+  PartyPopper,
+  Briefcase
 } from 'lucide-react';
 import { 
   FLEET_ITEMS, 
   TOUR_PACKAGES, 
   CAMERA_GEAR, 
   MEDIA_SERVICES, 
+  EVENT_ORGANIZER_SERVICES,
   COMPANY_INFO 
 } from '../data/mockData';
-import { FleetItem, TourPackage, CameraGear, MediaService } from '../types';
+import { FleetItem, TourPackage, CameraGear, MediaService, EventOrganizerService } from '../types';
 
 interface ServicesSectionProps {
   onSelectBookingItem: (item: {
@@ -42,11 +45,12 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
 
   const tabs = [
     { id: 'bus', label: 'Sewa Bus Pariwisata', icon: Bus, count: '3 Pilihan' },
-    { id: 'paket-wisata', label: 'Paket Ziarah & Tour', icon: Compass, count: '5 Paket' },
-    { id: 'elf', label: 'Sewa Elf (Microbus)', icon: Car, count: '2 Pilihan' },
-    { id: 'mobil', label: 'Sewa Mobil & Driver', icon: UserCheck, count: '3 Pilihan' },
-    { id: 'kamera', label: 'Rental Kamera', icon: Camera, count: '4 Unit' },
-    { id: 'cinematic', label: 'Jasa Fotografer & Cinematic', icon: Video, count: '3 Layanan' },
+    { id: 'hiace', label: 'Sewa HiAce Premio', icon: Car, count: 'Executive' },
+    { id: 'elf', label: 'Sewa Elf Long & Short', icon: Car, count: '2 Pilihan' },
+    { id: 'mobil', label: 'Sewa Rental Mobil', icon: UserCheck, count: '3 Pilihan' },
+    { id: 'paket-wisata', label: 'Paket Wisata', icon: Compass, count: '8 Paket' },
+    { id: 'event-organizer', label: 'Event Organizer', icon: PartyPopper, count: '6 Layanan' },
+    { id: 'cinematic', label: 'Dokumentasi & Kamera', icon: Video, count: 'Lengkap' },
   ];
 
   return (
@@ -75,16 +79,16 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-4 py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap flex-shrink-0 ${
+                className={`flex items-center gap-2 px-4 py-3 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap flex-shrink-0 ${
                   isActive
-                    ? 'bg-slate-900 text-white shadow-lg shadow-slate-900/20 scale-[1.02]'
+                    ? 'bg-[#0B2540] text-white shadow-lg shadow-sky-900/20 scale-[1.02] ring-2 ring-amber-400'
                     : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
                 }`}
               >
-                <Icon className={`w-4 h-4 ${isActive ? 'text-emerald-400' : 'text-slate-500'}`} />
+                <Icon className={`w-4 h-4 ${isActive ? 'text-amber-300' : 'text-slate-500'}`} />
                 <span>{tab.label}</span>
-                <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-bold ${
-                  isActive ? 'bg-emerald-500 text-white' : 'bg-slate-100 text-slate-500'
+                <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${
+                  isActive ? 'bg-[#00A859] text-white' : 'bg-slate-100 text-slate-500'
                 }`}>
                   {tab.count}
                 </span>
@@ -115,8 +119,8 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                       {bus.tag}
                     </span>
                   )}
-                  <div className="absolute bottom-3 right-3 bg-slate-900/90 text-white font-extrabold text-xs px-3 py-1.5 rounded-lg backdrop-blur-md">
-                    Rp {bus.pricePerDay.toLocaleString('id-ID')} / hari
+                  <div className="absolute bottom-3 right-3 bg-[#00A859] text-white font-extrabold text-xs px-3 py-1.5 rounded-lg shadow-md">
+                    Tanya Tarif Terbaik
                   </div>
                 </div>
 
@@ -207,10 +211,10 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                       {pkg.badge}
                     </span>
                   )}
-                  <div className="absolute bottom-3 left-3 right-3 bg-slate-900/90 text-white p-2.5 rounded-xl backdrop-blur-md">
-                    <span className="text-[10px] text-slate-300 block">Mulai dari</span>
-                    <span className="font-extrabold text-sm text-emerald-400">
-                      Rp {pkg.priceStartFrom.toLocaleString('id-ID')} / pax
+                  <div className="absolute bottom-3 left-3 right-3 bg-[#0B2540]/95 text-white p-2.5 rounded-xl backdrop-blur-md flex items-center justify-between">
+                    <span className="text-[10px] text-slate-300 block">Paket Wisata</span>
+                    <span className="font-extrabold text-xs text-amber-300">
+                      Konsultasi Jadwal &amp; Rute
                     </span>
                   </div>
                 </div>
@@ -293,6 +297,59 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
           </div>
         )}
 
+        {/* 2. SEWA HIACE (EXECUTIVE) */}
+        {activeTab === 'hiace' && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {FLEET_ITEMS.filter(item => item.category === 'hiace').map((hiace) => (
+              <div key={hiace.id} className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all p-6 flex flex-col justify-between">
+                <div>
+                  <div className="h-52 rounded-xl overflow-hidden mb-4 bg-slate-900 relative">
+                    <img src={hiace.image} alt={hiace.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                    <span className="absolute top-3 left-3 bg-sky-600 text-white font-bold text-[11px] px-3 py-1 rounded-full shadow-md">
+                      Executive Class
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs font-bold text-sky-700 bg-sky-50 px-2.5 py-1 rounded-full border border-sky-200">
+                      {hiace.capacity}
+                    </span>
+                    <span className="font-bold text-xs text-[#00A859] bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+                      Tarif Terbaik • Nego Ramah
+                    </span>
+                  </div>
+                  <h3 className="font-bold text-lg text-slate-900 mb-2">{hiace.name}</h3>
+                  <p className="text-xs text-slate-600 mb-4">{hiace.description}</p>
+                  
+                  <div className="mb-4">
+                    <h4 className="text-xs font-bold text-slate-700 mb-2">Keunggulan &amp; Fasilitas:</h4>
+                    <div className="flex flex-wrap gap-1.5">
+                      {hiace.facilities.map((f, idx) => (
+                        <span key={idx} className="text-[11px] bg-sky-50 text-sky-800 px-2.5 py-0.5 rounded border border-sky-100">
+                          • {f}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-2 pt-2">
+                  <button
+                    onClick={() => onSelectBookingItem({
+                      id: hiace.id,
+                      title: hiace.name,
+                      category: 'hiace',
+                    })}
+                    className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-md shadow-sky-600/20"
+                  >
+                    <Calendar className="w-3.5 h-3.5" />
+                    <span>Booking Sewa HiAce Ini</span>
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
         {/* 3. SEWA ELF (MICROBUS) */}
         {activeTab === 'elf' && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -306,8 +363,8 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                     <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
                       {elf.capacity}
                     </span>
-                    <span className="font-extrabold text-sm text-slate-900">
-                      Rp {elf.pricePerDay.toLocaleString('id-ID')} / hari
+                    <span className="font-bold text-xs text-[#00A859] bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+                      Tarif Terbaik • Nego Ramah
                     </span>
                   </div>
                   <h3 className="font-bold text-lg text-slate-900 mb-2">{elf.name}</h3>
@@ -353,8 +410,8 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                     <span className="text-xs font-bold text-slate-700 bg-slate-100 px-2.5 py-1 rounded-full">
                       {car.capacity}
                     </span>
-                    <span className="font-extrabold text-sm text-emerald-600">
-                      Rp {car.pricePerDay.toLocaleString('id-ID')} / hari
+                    <span className="font-bold text-xs text-[#00A859] bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+                      Tarif Kompetitif
                     </span>
                   </div>
                   <h3 className="font-bold text-base text-slate-900 mb-1">{car.name}</h3>
@@ -404,8 +461,8 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                 </div>
 
                 <div>
-                  <div className="text-xs font-bold text-slate-900 mb-3">
-                    Sewa: <span className="text-emerald-600">Rp {cam.pricePerDay.toLocaleString('id-ID')}</span> / 24 jam
+                  <div className="text-xs font-bold text-slate-700 mb-3">
+                    Status: <span className="text-[#00A859] font-extrabold">Kondisi Prima &amp; Lengkap</span>
                   </div>
                   <button
                     onClick={() => onSelectBookingItem({
@@ -423,7 +480,65 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
           </div>
         )}
 
-        {/* 6. JASA FOTOGRAFER & CINEMATIC */}
+        {/* 6. EVENT ORGANIZER & ACARA */}
+        {activeTab === 'event-organizer' && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {EVENT_ORGANIZER_SERVICES.map((eo) => (
+              <div key={eo.id} className="bg-white rounded-2xl border border-slate-200 overflow-hidden p-6 shadow-sm hover:shadow-xl transition-all flex flex-col justify-between group">
+                <div>
+                  <div className="h-48 rounded-xl overflow-hidden mb-4 bg-slate-900 relative">
+                    <img src={eo.image} alt={eo.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" referrerPolicy="no-referrer" />
+                    <span className="absolute top-3 left-3 bg-emerald-600 text-white font-bold text-[10px] uppercase px-2.5 py-1 rounded-full shadow-md">
+                      {eo.badge}
+                    </span>
+                  </div>
+
+                  <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full uppercase border border-emerald-200 mb-2 inline-block">
+                    Event Service
+                  </span>
+
+                  <h3 className="font-bold text-lg text-slate-900 mb-2 group-hover:text-emerald-700 transition-colors">
+                    {eo.title}
+                  </h3>
+                  <p className="text-xs text-slate-600 mb-4 leading-relaxed">
+                    {eo.description}
+                  </p>
+
+                  <div className="mb-6">
+                    <h4 className="text-xs font-bold text-slate-700 uppercase mb-2">Termasuk Layanan &amp; Output:</h4>
+                    <ul className="text-xs text-slate-600 space-y-1.5">
+                      {eo.deliverables.map((d, i) => (
+                        <li key={i} className="flex items-start gap-1.5">
+                          <Check className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0 mt-0.5" />
+                          <span>{d}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                <div>
+                  <div className="text-xs text-slate-600 mb-3 font-semibold">
+                    Penawaran: <span className="text-xs font-extrabold text-[#00A859] bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">Menyesuaikan Kebutuhan Acara</span>
+                  </div>
+                  <button
+                    onClick={() => onSelectBookingItem({
+                      id: eo.id,
+                      title: eo.title,
+                      category: 'event-organizer',
+                    })}
+                    className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs py-2.5 rounded-xl transition-all shadow-md shadow-emerald-600/20 flex items-center justify-center gap-1.5"
+                  >
+                    <Calendar className="w-3.5 h-3.5" />
+                    <span>Konsultasi &amp; Booking Acara</span>
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* 7. JASA FOTOGRAFER & CINEMATIC */}
         {activeTab === 'cinematic' && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {MEDIA_SERVICES.map((media) => (
@@ -452,8 +567,8 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                 </div>
 
                 <div>
-                  <div className="text-xs text-slate-500 mb-3">
-                    Mulai dari <strong className="text-sm font-extrabold text-slate-900">Rp {media.priceStartFrom.toLocaleString('id-ID')}</strong>
+                  <div className="text-xs text-slate-600 mb-3 font-semibold">
+                    Paket: <span className="text-xs font-extrabold text-[#00A859] bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">Konsultasi Konsep &amp; Rute</span>
                   </div>
                   <button
                     onClick={() => onSelectBookingItem({

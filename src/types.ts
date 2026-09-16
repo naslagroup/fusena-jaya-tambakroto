@@ -1,6 +1,8 @@
 export type ServiceCategory = 
   | 'bus'
   | 'paket-wisata'
+  | 'event-organizer'
+  | 'hiace'
   | 'elf'
   | 'mobil'
   | 'sopir'
@@ -11,7 +13,7 @@ export type ServiceCategory =
 export interface FleetItem {
   id: string;
   name: string;
-  category: 'bus' | 'elf' | 'mobil';
+  category: 'bus' | 'elf' | 'mobil' | 'hiace';
   capacity: string;
   seats: number;
   transmission?: string;
@@ -26,7 +28,7 @@ export interface FleetItem {
 export interface TourPackage {
   id: string;
   title: string;
-  category: 'ziarah' | 'study-tour' | 'kkl' | 'kunjungan-industri' | 'wisata-alam';
+  category: 'ziarah' | 'study-tour' | 'kkl' | 'kunjungan-industri' | 'wisata-alam' | 'domestik' | 'custom' | 'outbound';
   duration: string;
   minPersons: number;
   destinations: string[];
@@ -35,6 +37,17 @@ export interface TourPackage {
   image: string;
   badge?: string;
   description: string;
+}
+
+export interface EventOrganizerService {
+  id: string;
+  title: string;
+  category: 'wedding' | 'ulang-tahun' | 'dinas' | 'seminar' | 'reuni' | 'lainnya';
+  deliverables: string[];
+  priceStartFrom: number;
+  image: string;
+  description: string;
+  badge?: string;
 }
 
 export interface CameraGear {

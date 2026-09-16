@@ -12,6 +12,7 @@ import {
   Compass
 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/mockData';
+import { BrandLogo } from './BrandLogo';
 
 interface NavbarProps {
   onOpenBooking: (initialCategory?: string) => void;
@@ -36,37 +37,43 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, activeSection }) 
 
   const navLinks = [
     { name: 'Beranda', href: '#beranda' },
-    { name: 'Layanan & Armada', href: '#layanan' },
-    { name: 'Paket Wisata & Ziarah', href: '#paket' },
-    { name: 'Portofolio & Cinematic', href: '#galeri' },
-    { name: 'Kalkulator Biaya', href: '#kalkulator' },
-    { name: 'Konsultan AI', href: '#ai-consultant' },
-    { name: 'Testimoni', href: '#testimoni' },
+    { name: 'Melayani Jasa', href: '#melayani-jasa' },
+    { name: 'Paket Wisata', href: '#paket' },
+    { name: 'Event Organizer', href: '#event-organizer' },
+    { name: 'Katalog Detail', href: '#layanan' },
+    { name: 'Simulasi Sewa', href: '#kalkulator' },
     { name: 'Kontak', href: '#kontak' },
   ];
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
       {/* Top Bar Contact Info */}
-      <div className="bg-slate-900 text-slate-300 text-xs py-2 px-4 border-b border-slate-800 hidden md:block">
+      <div className="bg-[#072036] text-slate-200 text-xs py-2 px-4 border-b border-sky-900/60 hidden md:block">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-6">
-            <span className="flex items-center gap-1.5 hover:text-emerald-400 transition-colors">
-              <MapPin className="w-3.5 h-3.5 text-emerald-500" />
+            <span className="flex items-center gap-1.5 text-sky-200">
+              <MapPin className="w-3.5 h-3.5 text-[#00A859]" />
               {COMPANY_INFO.address}
             </span>
-            <span className="flex items-center gap-1.5 hover:text-emerald-400 transition-colors">
-              <Phone className="w-3.5 h-3.5 text-emerald-500" />
-              {COMPANY_INFO.displayPhone}
-            </span>
+            <a 
+              href={`https://wa.me/${COMPANY_INFO.phone}?text=Halo%20Mas%20${encodeURIComponent(COMPANY_INFO.contactPerson)},%20saya%20ingin%20tanya%20layanan%20CV.%20Fusena%20Jaya.`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 hover:text-amber-300 transition-colors font-bold text-white"
+            >
+              <Phone className="w-3.5 h-3.5 text-[#00A859]" />
+              WA: {COMPANY_INFO.displayPhone} ({COMPANY_INFO.contactPerson})
+            </a>
           </div>
           <div className="flex items-center gap-4">
-            <span className="text-emerald-400 font-medium flex items-center gap-1">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              Layanan Booking & Ziarah 24 Jam
+            <span className="text-amber-300 font-script text-base font-bold tracking-wide">
+              &ldquo;{COMPANY_INFO.motto}&rdquo;
             </span>
-            <span className="text-slate-400">|</span>
-            <span className="text-slate-300 font-medium">Demak • Kudus • Semarang • All Indonesia</span>
+            <span className="text-sky-700">|</span>
+            <span className="text-emerald-300 font-medium flex items-center gap-1">
+              <span className="w-2 h-2 rounded-full bg-[#00A859] animate-pulse"></span>
+              Layanan Wisata &amp; EO 24 Jam
+            </span>
           </div>
         </div>
       </div>
@@ -76,29 +83,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, activeSection }) 
         id="main-nav-bar"
         className={`transition-all duration-300 ${
           isScrolled 
-            ? 'bg-white/95 backdrop-blur-md shadow-md py-3 text-slate-900' 
-            : 'bg-slate-900/90 backdrop-blur-md py-4 text-white border-b border-white/10'
+            ? 'bg-white/95 backdrop-blur-md shadow-md py-2.5 text-slate-900' 
+            : 'bg-[#0B2540]/95 backdrop-blur-md py-3.5 text-white border-b border-sky-500/20'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          {/* Logo Brand */}
-          <a href="#beranda" className="flex items-center gap-3 group">
-            <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white shadow-lg shadow-emerald-600/30 group-hover:scale-105 transition-transform">
-              <Bus className="w-6 h-6" />
-            </div>
-            <div>
-              <div className="flex items-center gap-1.5">
-                <span className={`font-extrabold text-lg sm:text-xl tracking-tight ${isScrolled ? 'text-slate-900' : 'text-white'}`}>
-                  CV. FUSENA JAYA
-                </span>
-                <span className="bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold px-1.5 py-0.5 rounded border border-emerald-500/30">
-                  OFFICIAL
-                </span>
-              </div>
-              <p className={`text-xs font-medium tracking-wide ${isScrolled ? 'text-emerald-700' : 'text-emerald-400'}`}>
-                Biro Perjalanan Ziarah & Wisata
-              </p>
-            </div>
+          {/* Official Brand Logo with tropical sun/mountain emblem */}
+          <a href="#beranda" className="group">
+            <BrandLogo
+              variant={isScrolled ? 'dark' : 'light'}
+              size="md"
+              showSubtitle={true}
+            />
           </a>
 
           {/* Desktop Nav Links */}
@@ -107,7 +103,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, activeSection }) 
               <a
                 key={link.name}
                 href={link.href}
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                className={`px-3 py-1.5 rounded-lg text-xs xl:text-sm font-semibold transition-colors ${
                   isScrolled
                     ? 'text-slate-700 hover:text-emerald-600 hover:bg-slate-100'
                     : 'text-slate-200 hover:text-white hover:bg-white/10'
@@ -139,7 +135,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, activeSection }) 
             <button
               id="nav-online-booking-btn"
               onClick={() => onOpenBooking()}
-              className="flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-md shadow-emerald-600/20 transition-all hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]"
+              className="flex items-center gap-2 bg-[#00A859] hover:bg-emerald-600 text-white font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-md shadow-emerald-800/30 transition-all hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]"
             >
               <Calendar className="w-4 h-4" />
               <span>Booking Online</span>

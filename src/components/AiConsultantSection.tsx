@@ -188,7 +188,7 @@ export const AiConsultantSection: React.FC = () => {
               type="text"
               value={inputPrompt}
               onChange={(e) => setInputPrompt(e.target.value)}
-              placeholder="Tanyakan jadwal ziarah, rekomendasi bus, atau estimasi harga..."
+              placeholder="Tanyakan rekomendasi armada, rute wisata, atau konsultasi acara..."
               className="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 font-medium"
             />
             <button
