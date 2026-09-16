@@ -126,12 +126,24 @@ export const PortfolioSection: React.FC = () => {
               <div className="p-6 space-y-4">
                 {activeMediaModal.videoUrl ? (
                   <div className="aspect-video rounded-xl overflow-hidden bg-black">
-                    <video
-                      src={activeMediaModal.videoUrl}
-                      controls
-                      autoPlay
-                      className="w-full h-full object-contain"
-                    />
+                    {activeMediaModal.videoUrl.includes('youtube.com') || activeMediaModal.videoUrl.includes('youtu.be') ? (
+                      <iframe
+                        src={activeMediaModal.videoUrl.includes('watch?v=') 
+                          ? activeMediaModal.videoUrl.replace('watch?v=', 'embed/') + '?autoplay=1'
+                          : activeMediaModal.videoUrl}
+                        title={activeMediaModal.title}
+                        className="w-full h-full border-0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                      />
+                    ) : (
+                      <video
+                        src={activeMediaModal.videoUrl}
+                        controls
+                        autoPlay
+                        className="w-full h-full object-contain"
+                      />
+                    )}
                   </div>
                 ) : (
                   <div className="max-h-[70vh] rounded-xl overflow-hidden bg-black">

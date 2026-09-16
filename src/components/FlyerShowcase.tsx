@@ -40,6 +40,7 @@ export const FlyerShowcase: React.FC<FlyerShowcaseProps> = ({ onSelectBookingIte
   const [selectedFleetTab, setSelectedFleetTab] = useState<'mobil' | 'hiace' | 'elf' | 'bus'>('bus');
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
+  const [hasVideoError, setHasVideoError] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const togglePlay = () => {
@@ -230,17 +231,26 @@ export const FlyerShowcase: React.FC<FlyerShowcaseProps> = ({ onSelectBookingIte
 
                   {/* Video Stage Frame */}
                   <div className="relative rounded-2xl overflow-hidden aspect-[9/16] bg-black shadow-inner">
-                    <video
-                      ref={videoRef}
-                      src="/videos/fusena-reel.mp4"
-                      poster="/videos/fusena-reel-poster.jpg"
-                      autoPlay
-                      loop
-                      muted={isMuted}
-                      playsInline
-                      className="w-full h-full object-cover cursor-pointer"
-                      onClick={togglePlay}
-                    />
+                    {!hasVideoError ? (
+                      <video
+                        ref={videoRef}
+                        src="/videos/fusena-reel.mp4"
+                        poster="/videos/fusena-reel-poster.jpg"
+                        autoPlay
+                        loop
+                        muted={isMuted}
+                        playsInline
+                        className="w-full h-full object-cover cursor-pointer"
+                        onClick={togglePlay}
+                        onError={() => setHasVideoError(true)}
+                      />
+                    ) : (
+                      <img
+                        src="/videos/fusena-reel-poster.jpg"
+                        alt="Poster Fusena Jaya"
+                        className="w-full h-full object-cover"
+                      />
+                    )}
 
                     {/* Top Overlay Controls */}
                     <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between z-10 pointer-events-none">
