@@ -1,0 +1,21 @@
+{
+  "name": "CV. FUSENA JAYA - Biro Perjalanan Wisata & Event Organizer",
+  "short_name": "Fusena Jaya",
+  "description": "Biro Perjalanan Wisata & Event Organizer Resmi Jawa Tengah. Layanan Sewa Bus Pariwisata, HiAce, Elf, Rental Mobil, Paket Tour, dan Event Organizer.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#072036",
+  "theme_color": "#072036",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/fusena-emblem.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

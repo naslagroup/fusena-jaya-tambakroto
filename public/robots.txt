@@ -1,0 +1,10 @@
+# Robots.txt for Fusena Jaya Tour & Event
+# Official Domain: https://fusena-jaya.netlify.app/
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Search Engine Sitemap
+Sitemap: https://fusena-jaya.netlify.app/sitemap.xml
+Host: https://fusena-jaya.netlify.app

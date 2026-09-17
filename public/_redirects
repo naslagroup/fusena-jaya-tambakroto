@@ -1,0 +1,5 @@
+# Netlify Redirects & SPA Routing
+/robots.txt         /robots.txt         200
+/sitemap.xml        /sitemap.xml        200
+/google*.html       /:splat             200
+/*                  /index.html         200
