@@ -105,12 +105,27 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="pt-8 border-t border-sky-900/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-sky-200 text-[11px]">
+        <div className="pt-8 border-t border-sky-900/60 flex flex-col md:flex-row items-center justify-between gap-4 text-sky-200 text-[11px]">
           <div>
             © {new Date().getFullYear()} CV. FUSENA JAYA. Biro Perjalanan Wisata &amp; Event Organizer.
           </div>
-          <div className="flex items-center gap-1 text-amber-300 font-semibold">
-            <span>Aman &amp; Terpercaya • Pelayanan Terbaik • Harga Kompetitif</span>
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+            <span className="text-amber-300 font-semibold">
+              Aman &amp; Terpercaya • Pelayanan Terbaik • Harga Kompetitif
+            </span>
+            <span className="hidden sm:inline text-sky-800">•</span>
+            <span className="text-slate-300">
+              Created by{' '}
+              <a
+                href="https://ahmad.shofinasla.workers.dev/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-amber-400 hover:text-amber-300 font-bold hover:underline transition-colors inline-flex items-center gap-1"
+                title="Portfolio & Profil Ahmad Shofi Nasla"
+              >
+                Ahmad Shofi Nasla
+              </a>
+            </span>
           </div>
         </div>
       </div>
